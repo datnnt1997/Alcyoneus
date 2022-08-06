@@ -1,0 +1,28 @@
+version: '3.2'
+
+services:
+  citadel:
+    image: mysql
+    container_name: citadel
+    restart: always
+    expose:
+      - "3306"
+    ports:
+      - "3306:3306"
+    networks:
+      alcyoneus-network:
+        aliases:
+          - citadel
+    volumes:
+      - ./citadel/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - ./citadel/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: citadel
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+
+networks:
+  alcyoneus-network:
+    external:
+      name: alcyoneus-network
