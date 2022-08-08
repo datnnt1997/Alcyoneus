@@ -3,22 +3,34 @@ CREATE DATABASE `citadel` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 USE citadel;
 
+CREATE TABLE `channel` (
+  `chid` INT(11) NOT NULL AUTO_INCREMENT,
+  `chname` VARCHAR(50) NOT NULL COMMENT 'Name of source of message',
+  `description` VARCHAR(50) NOT NULL COMMENT 'Root url of source',
+  `create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Creation time',
+  `update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Update time',
+  PRIMARY KEY (`chid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table storage for channel of source';
+
 CREATE TABLE `source` (
   `sid` INT(11) NOT NULL AUTO_INCREMENT,
+  `chid` INT(11) NOT NULL,
   `sname` VARCHAR(50) NOT NULL COMMENT 'Name of source of message',
   `domain` VARCHAR(50) NOT NULL COMMENT 'Root url of source',
   `create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Creation time',
   `update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Update time',
   PRIMARY KEY (`sid`),
+  FOREIGN KEY (`chid`) REFERENCES channel(`chid`),
   UNIQUE KEY root_url (`domain`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table storage for sources of message';
 
-CREATE TABLE `source_decryption` (
+CREATE TABLE `decryption` (
     `did` INT(11) NOT NULL AUTO_INCREMENT,
     `sid` INT(11) NOT NULL,
     `start_url` VARCHAR(512) NOT NULL,
     `pagination` VARCHAR(512) NOT NULL,
     `article_url` VARCHAR(512) NOT NULL,
+    `category` VARCHAR(512) NOT NULL,
     `title` VARCHAR(512) DEFAULT NULL,
     `author` VARCHAR(512) DEFAULT NULL,
     `tags` VARCHAR(512) DEFAULT NULL,
