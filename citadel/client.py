@@ -1,10 +1,8 @@
 from sqlalchemy import create_engine
-from sqlalchemy import distinct
-from sqlalchemy import func
 from sqlalchemy.orm import sessionmaker
 
 from settings import DB_URI_MYSQL, DB_POOL_SIZE
-from citadel.models import Source, Decryption
+from citadel.models import Source, Decryption, CosmicMessage
 
 
 engine_mysql = create_engine(DB_URI_MYSQL, pool_size=DB_POOL_SIZE, max_overflow=0)
