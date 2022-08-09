@@ -9,12 +9,12 @@
 
 BOT_NAME = 'oao2'
 
-SPIDER_MODULES = ['telescopes.oao2']
-NEWSPIDER_MODULE = 'telescopes.oao2'
+SPIDER_MODULES = ['alcyoneus.telescopes.oao2']
+NEWSPIDER_MODULE = 'alcyoneus.telescopes.oao2'
 
 DUPEFILTER_DEBUG = True
 DOWNLOAD_TIMEOUT = 60
-LOG_FORMATTER = 'telescopes.log_formatter.AlcyoneusLogFormatter'
+LOG_FORMATTER = 'alcyoneus.telescopes.log_formatter.AlcyoneusLogFormatter'
 
 DEPTH_PRIORITY = 1
 SCHEDULER_DISK_QUEUE = 'scrapy.squeues.PickleFifoDiskQueue'
@@ -27,7 +27,7 @@ SCHEDULER_MEMORY_QUEUE = 'scrapy.squeues.FifoMemoryQueue'
 ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 1
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
@@ -38,7 +38,7 @@ DOWNLOAD_DELAY = 0.5
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED = False
+COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
@@ -69,9 +69,9 @@ DOWNLOAD_DELAY = 0.5
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'oao2.pipelines.Oao2Pipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'alcyoneus.telescopes.pipelines.StoreCMessagePipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

@@ -1,29 +1,33 @@
-# Define here the models for your scraped items
-#
-# See documentation in:
-# https://docs.scrapy.org/en/latest/topics/items.html
 from scrapy import Item, Field
-from itemloaders.processors import MapCompose
+from itemloaders.processors import MapCompose, TakeFirst, Join
 
-from .normalizer import ConvertToDatetime
+from .normalizer import (ConvertToDatetime, ConvertToJsonString,
+                         NormalizeText, NormalizeAuthor)
 
 
 class CosmicMessageItem(Item):
     """
     CITADEL Tabel: `cosmic_message`
     """
-    sid: int = Field()
-    cid: int = Field()
-    url: str = Field()
-    title: str = Field()
-    author: str = Field()
-    tags: str = Field()
-    description: str = Field()
-    abstract: str = Field()
-    content: str = Field()
-    media: str = Field()
+    sid: int = Field(output_processor=TakeFirst())
+    cid: int = Field(output_processor=TakeFirst())
+    url: str = Field(output_processor=TakeFirst())
+    title: str = Field(input_processor=MapCompose(NormalizeText()),
+                       output_processor=TakeFirst())
+    author: str = Field(input_processor=MapCompose(NormalizeText(), NormalizeAuthor()),
+                        output_processor=TakeFirst())
+    tags: str = Field(input_processor=MapCompose(NormalizeText()),
+                      output_processor=ConvertToJsonString())
+    description: str = Field(input_processor=MapCompose(NormalizeText()),
+                             output_processor=Join('\n'))
+    abstract: str = Field(input_processor=MapCompose(NormalizeText()),
+                          output_processor=Join('\n'))
+    content: str = Field(input_processor=MapCompose(NormalizeText()),
+                         output_processor=Join('\n'))
+    media: str = Field(output_processor=ConvertToJsonString())
     pub_time: str = Field(
-        input_processor=MapCompose(ConvertToDatetime))
+        input_processor=MapCompose(ConvertToDatetime()),
+        output_processor=TakeFirst())
 
     def to_dict(self):
         return self.__dict__['_values']

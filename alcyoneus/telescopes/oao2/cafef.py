@@ -1,6 +1,6 @@
 from typing import Union, List
 
-from alcyoneus.citadel import get_source_decrption
+from alcyoneus.citadel.client import get_source_decrption
 from alcyoneus.telescopes.items import CosmicMessageItem
 
 from scrapy.loader import ItemLoader
@@ -59,8 +59,8 @@ class CafefSpider(scrapy.Spider):
         # Parse Article links
         yield from response.follow_all(xpath=self.decryption_rules.article_url, callback=self.parse)
         # Parse pagination
-        yield from response.follow_all(xpath=self.decryption_rules.pagination,
-                                       callback=self.parse_pagination_and_article_links)
+        # yield from response.follow_all(xpath=self.decryption_rules.pagination,
+        #                                callback=self.parse_pagination_and_article_links)
 
     def parse(self, response, **kwargs):
         loader = ItemLoader(item=CosmicMessageItem(), selector=response)
