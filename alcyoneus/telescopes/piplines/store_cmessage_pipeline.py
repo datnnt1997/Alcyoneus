@@ -1,5 +1,3 @@
-from citadel.client import *
-
 class StoreCMessagePipeline:
     def __init__(self, stats):
         self.session = None

@@ -1,7 +1,7 @@
 from typing import Union, List
 
-from citadel.client import get_source_decrption
-from telescopes.items import CosmicMessageItem
+from alcyoneus.citadel import get_source_decrption
+from alcyoneus.telescopes.items import CosmicMessageItem
 
 from scrapy.loader import ItemLoader
 

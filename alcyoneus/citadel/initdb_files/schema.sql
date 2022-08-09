@@ -1,5 +1,10 @@
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 DROP DATABASE IF EXISTS `citadel`;
-CREATE DATABASE `citadel` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE `citadel`;
 
 USE citadel;
 
@@ -10,7 +15,7 @@ CREATE TABLE `channel` (
   `create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Creation time',
   `update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Update time',
   PRIMARY KEY (`chid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table storage for channel of source';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Table storage for channel of source';
 
 CREATE TABLE `source` (
   `sid` INT(11) NOT NULL AUTO_INCREMENT,
@@ -22,7 +27,7 @@ CREATE TABLE `source` (
   PRIMARY KEY (`sid`),
   FOREIGN KEY (`chid`) REFERENCES channel(`chid`),
   UNIQUE KEY root_url (`domain`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table storage for sources of message';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Table storage for sources of message';
 
 CREATE TABLE `decryption` (
     `did` INT(11) NOT NULL AUTO_INCREMENT,
@@ -41,7 +46,7 @@ CREATE TABLE `decryption` (
     `create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Creation time',
     `update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Update time',
     PRIMARY KEY (`did`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table storage for rules for decryption message from universe';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Table storage for rules for decryption message from universe';
 
 CREATE TABLE `category` (
   `cid` INT(11) NOT NULL AUTO_INCREMENT,
@@ -50,7 +55,7 @@ CREATE TABLE `category` (
   `update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Update time',
   `delete_time` TIMESTAMP DEFAULT NULL COMMENT 'Delete time',
   PRIMARY KEY (`cid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table storage for categories';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Table storage for categories';
 
 CREATE TABLE `cosmic_message` (
   `mid` INT(11) NOT NULL AUTO_INCREMENT,
@@ -75,5 +80,5 @@ CREATE TABLE `cosmic_message` (
   UNIQUE INDEX USING BTREE (url),
   INDEX USING BTREE (title),
   INDEX USING BTREE (pub_time)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table storage for the whole of the crawl result';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Table storage for the whole of the crawl result';
 

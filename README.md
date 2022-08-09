@@ -3,7 +3,7 @@
 Code by 🧑‍💻**Trong-Dat Ngo**.
 
 <h2 align="center">
-<img src="statics/img.png" alt="drawing" height="400" width="800"/>
+<img src="statics/images/img.png" alt="drawing" height="400" width="800"/>
 </h2>
 
 
@@ -13,4 +13,4 @@ characteristics with the others but also stands out in its own way. 🌌Alcyoneu
 miss a vital cosmic 🎇message by compiling news from all of the news sources🌠 that the users have chosen.
 
 ## 📋 Todo
-My plans and progress on coding for 🌌Alcyoneus are detailed in [**TODO.md**](TODO.md).
+My plans and progress on coding for 🌌Alcyoneus are detailed in [**TODO.md**](statics/readmes/TODO.md).

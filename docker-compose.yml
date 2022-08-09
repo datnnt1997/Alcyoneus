@@ -14,9 +14,9 @@ services:
         aliases:
           - citadel
     volumes:
-      - ./citadel/scripts/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
-      - ./citadel/scripts/data.sql:/docker-entrypoint-initdb.d/data.sql:ro
-      - ./citadel/data:/var/lib/mysql
+      - ./alcyoneus/citadel/initdb_files/schema.sql:/docker-entrypoint-initdb.d/first.sql
+      - ./alcyoneus/citadel/initdb_files/data.sql:/docker-entrypoint-initdb.d/second.sql
+      - ./alcyoneus/citadel/data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: citadel
