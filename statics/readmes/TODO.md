@@ -39,3 +39,9 @@ Code by 🧑‍💻**Trong-Dat Ngo**.
 
 ## 🖥️ Front-end
 - [ ] 🛰️ ...
+
+## 📄 Document
+- [ ] 📝 Alcyoneus is ... ? (Introduction)
+- [ ] 📝 Universe's Infinity Stones (Technologies)
+- [ ] 📝 Features
+- [ ] 📝 Setup
