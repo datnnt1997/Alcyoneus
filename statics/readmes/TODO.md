@@ -7,14 +7,17 @@ Code by 🧑‍💻**Trong-Dat Ngo**.
 - [x] ~~🏷️ Initializing the Alcyoneus project~~
 - [ ] 🏷️ Define an OAO2 base class;
 - [x] ~~🏷️ limit the number of pagination the crawler has to go through~~
+- [ ] 🏷️ ...
 
 ## 🛰 Middleware
 - [ ] 📡 Duplicate message source URL filter;
+- [ ] 📡 ...
 
 ## 🚀 Pipeline
 - [x] ~~🔭 Insert scraped CosmicMessageItem to CITADEL~~
 - [ ] 🔭 Validate CosmicMessageItem
 - [ ] 🔭 Rule-based category classification;
+- [ ] 🔭 ...
 
 ## 🕷️ Spider
 ### 🎇 Newspaper
@@ -24,11 +27,15 @@ Code by 🧑‍💻**Trong-Dat Ngo**.
 - [ ] 🪐 Tuổi trẻ (🇻🇳 - www.tuoitre.vn)
 - [ ] 🪐 Thanh Niên (🇻🇳 - www.thanhnien.vn)
 - [ ] 🪐 Lao Động (🇻🇳 - www.laodong.vn)
-- [ ] ...
+- [ ] 🪐 ...
 ### 🎆 Social Network
 - [ ] 🌏 Facebook (🇺🇳 - www.facebook.com)
 - [ ] 🌏 Twitter (🇺🇳 - www.twitter.com)
 - [ ] 🌏 Reddit (🇺🇳 - www.reddit.com)
-- [ ] ...
+- [ ] 🌏 ...
+
+## 👨‍⚖️ Orchestrator
+- [ ] ️🧾 ...
+
 ## 🖥️ Front-end
 - [ ] 🛰️ ...
