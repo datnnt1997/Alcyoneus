@@ -34,6 +34,7 @@ CREATE TABLE `decryption` (
     `sid` INT(11) NOT NULL,
     `start_url` VARCHAR(512) NOT NULL,
     `pagination` VARCHAR(512) NOT NULL,
+    `pagination_limit` VARCHAR(512) NOT NULL,
     `article_url` VARCHAR(512) NOT NULL,
     `category` VARCHAR(512) NOT NULL,
     `title` VARCHAR(512) DEFAULT NULL,

@@ -6,6 +6,7 @@ Code by 🧑‍💻**Trong-Dat Ngo**.
 ## 🗺️ General
 - [x] ~~🏷️ Initializing the Alcyoneus project~~
 - [ ] 🏷️ Define an OAO2 base class;
+- [x] ~~🏷️ limit the number of pagination the crawler has to go through~~
 
 ## 🛰 Middleware
 - [ ] 📡 Duplicate message source URL filter;

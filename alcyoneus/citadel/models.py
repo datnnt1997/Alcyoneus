@@ -64,6 +64,7 @@ class Decryption(Base):
     sid = Column(Integer, ForeignKey("source.sid"))
     start_url = Column(String(512), nullable=False)
     pagination = Column(String(512), nullable=False)
+    pagination_limit = Column(String(512), nullable=False)
     article_url = Column(String(512), nullable=False)
     category = Column(String(512), nullable=False)
     title = Column(String(512), server_default=None)

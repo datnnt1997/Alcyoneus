@@ -8,7 +8,7 @@ engine_mysql = create_engine(DB_URI_MYSQL, pool_size=DB_POOL_SIZE, max_overflow=
 db_session_mysql = sessionmaker(bind=engine_mysql, autocommit=True)
 
 
-def get_source_decrption(domain):
+def get_source_decryption(domain):
     session = db_session_mysql()
     try:
         result = session.query(Decryption).join(Source).filter(Source.domain == domain).first()

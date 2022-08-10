@@ -1,17 +1,29 @@
 from typing import Union, List
 
-from alcyoneus.citadel.client import get_source_decrption
+from scrapy.loader import ItemLoader
+from scrapy.exceptions import CloseSpider
+
+from alcyoneus.citadel.client import get_source_decryption
 from alcyoneus.telescopes.items import CosmicMessageItem
 
-from scrapy.loader import ItemLoader
-
 import scrapy
+import re
 
 
 class CafefSpider(scrapy.Spider):
     name = 'cafef.vn'
 
-    decryption_rules = get_source_decrption(name)
+    decryption_rules = None
+
+    @classmethod
+    def from_crawler(cls, crawler, *args, **kwargs):
+        source_decryption = get_source_decryption(cls.name)
+        if source_decryption:
+            cls.decryption_rules = source_decryption
+            cls.start_urls = [cls.decryption_rules.start_url]
+            spider = super().from_crawler(crawler, *args, **kwargs)
+            return spider
+        raise CloseSpider(f"No `{cls.name}` spider decryption rules found!")
 
     def extract_url(self, response) -> str:
         return response.url
@@ -52,17 +64,25 @@ class CafefSpider(scrapy.Spider):
             return None
         return response.xpath(self.decryption_rules.pub_time).get()
 
-    def start_requests(self):
-        return [scrapy.Request(url=self.decryption_rules.start_url, callback=self.parse_pagination_and_article_links)]
-
-    def parse_pagination_and_article_links(self, response, **kwargs):
-        # Parse Article links
-        yield from response.follow_all(xpath=self.decryption_rules.article_url, callback=self.parse)
-        # Parse pagination
-        # yield from response.follow_all(xpath=self.decryption_rules.pagination,
-        #                                callback=self.parse_pagination_and_article_links)
+    def validate_pagination(self, response) -> bool:
+        if response.url in self.start_urls:
+            return True
+        match = re.match(self.decryption_rules.pagination_limit, response.url)
+        if match and match.group(1).isalnum():
+            return int(match.group(1)) <= self.settings.get('PAGINATION_LIMIT', float('inf'))
+        else:
+            # Check by datetime
+            return False
 
     def parse(self, response, **kwargs):
+        # Parse Article links
+        # yield from response.follow_all(xpath=self.decryption_rules.article_url, callback=self.parse)
+        # Parse pagination
+        if self.validate_pagination(response):
+            yield from response.follow_all(xpath=self.decryption_rules.pagination,
+                                           callback=self.parse)
+
+    def parse_message(self, response, **kwargs):
         loader = ItemLoader(item=CosmicMessageItem(), selector=response)
         loader.add_value('sid', self.decryption_rules.sid)
         loader.add_value('cid', self.extract_category(response))
@@ -75,6 +95,3 @@ class CafefSpider(scrapy.Spider):
         loader.add_value('media', self.extract_media(response))
         loader.add_value('pub_time', self.extract_pub_time(response))
         return loader.load_item()
-
-
-

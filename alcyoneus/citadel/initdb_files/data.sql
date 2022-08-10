@@ -27,7 +27,7 @@ VALUES
     (1, 1, 'cafef', 'cafef.vn');
 
 -- Insert decryption datas
-INSERT INTO `decryption`(DID, SID, START_URL, PAGINATION, ARTICLE_URL, CATEGORY, TITLE, AUTHOR, TAGS, DESCRIPTION, CONTENT, MEDIA, PUB_TIME)
+INSERT INTO `decryption`(DID, SID, START_URL, PAGINATION, PAGINATION_LIMIT, ARTICLE_URL, CATEGORY, TITLE, AUTHOR, TAGS, DESCRIPTION, CONTENT, MEDIA, PUB_TIME)
 values
-    (1, 1, 'https://cafef.vn/doc-nhanh.chn', './/div[@class="page"]/a[last()]', './/ul[@class="viewport"]//a[@class="news-title"]', './/header//a[@class="cat"]/@href', './/h1/text()', './/p[@class="author"]/text()', './/div[@class="tagdetail"]/div[@class="row2"]/a/text()', './/h2[@class=''sapo'']/text()', './/div[@id="mainContent"]/p/text()', './/div[@class="media"]/img/@src|.//img[@type="photo"]/@src', './/span[@class="pdate"]/text()');
+    (1, 1, 'https://cafef.vn/doc-nhanh.chn', './/div[@class="page"]/a[last()]', 'https:\/\/cafef\.vn\/doc-nhanh\/trang-(\\d+)\.chn', './/ul[@class="viewport"]//a[@class="news-title"]', './/header//a[@class="cat"]/@href', './/h1/text()', './/p[@class="author"]/text()', './/div[@class="tagdetail"]/div[@class="row2"]/a/text()', './/h2[@class=''sapo'']/text()', './/div[@id="mainContent"]/p/text()', './/div[@class="media"]/img/@src|.//img[@type="photo"]/@src', './/span[@class="pdate"]/text()');
 

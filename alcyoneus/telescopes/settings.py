@@ -12,6 +12,8 @@ BOT_NAME = 'oao2'
 SPIDER_MODULES = ['alcyoneus.telescopes.oao2']
 NEWSPIDER_MODULE = 'alcyoneus.telescopes.oao2'
 
+PAGINATION_LIMIT = 10
+
 DUPEFILTER_DEBUG = True
 DOWNLOAD_TIMEOUT = 60
 LOG_FORMATTER = 'alcyoneus.telescopes.log_formatter.AlcyoneusLogFormatter'
