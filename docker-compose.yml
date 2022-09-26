@@ -2,13 +2,13 @@ version: '3.2'
 
 services:
   citadel:
-    image: mysql
+    image: postgres
     container_name: citadel
     restart: always
     expose:
-      - "3306"
+      - "5432"
     ports:
-      - "3306:3306"
+      - "5432:5432"
     networks:
       alcyoneus-network:
         aliases:
@@ -16,13 +16,30 @@ services:
     volumes:
       - ./alcyoneus/citadel/initdb_files/schema.sql:/docker-entrypoint-initdb.d/first.sql
       - ./alcyoneus/citadel/initdb_files/data.sql:/docker-entrypoint-initdb.d/second.sql
-      - ./alcyoneus/citadel/data:/var/lib/mysql
+      - ./volumes/citadel/data:/var/lib/postgresql/data
     environment:
-      MYSQL_ROOT_PASSWORD: admin
-      MYSQL_DATABASE: citadel
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: admin
+      - TZ=Asia/Ho_Chi_Minh
+      - PGTZ=Asia/Ho_Chi_Minh
+      - PGDATA=/var/lib/postgresql/data
+      - PGPASSWORD=admin
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=citadel
 
+  adminer:
+    image: adminer
+    container_name: citadel-adminer
+    restart: always
+    depends_on:
+      - citadel
+    expose:
+      - "8080"
+    ports:
+      - 8081:8080
+    networks:
+      alcyoneus-network:
+        aliases:
+          - citadel-adminer
 networks:
   alcyoneus-network:
     external:

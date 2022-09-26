@@ -11,10 +11,10 @@ import scrapy
 import re
 
 
-class CafefSpider(scrapy.Spider):
-    name = 'cafef.vn'
-
+class BaseSpider(scrapy.Spider):
+    name: str = 'base'
     decryption_rules = None
+    state: dict = None
 
     @classmethod
     def from_crawler(cls, crawler, *args, **kwargs):
